@@ -31,13 +31,12 @@ def populate(df, N, k):
         df_shift = df.apply(np.roll,shift=i+1)           # last row goes to first
         df_new = populate_shift(df_new, df_shift, i, k)
     return df_new
-    
+
 #    
-def empty_values(df, N, number_of_rows):
-    df.iloc[0:N, number_of_cols:]=''
-    #TODO: only the last row needs to be empty?
-    df.iloc[number_of_rows-1, number_of_cols:]=''  #-1 did not work for me
-    return df
+def populate_shift(df, df_shift, i , k):
+    df_shift = rename_cols(df_shift, i, k)
+    df_new = pd.concat([df,df_shift.iloc[:,1:]], axis=1)
+    return df_new
 
 #
 def rename_cols(df, i, k):
@@ -52,16 +51,21 @@ def rename_cols(df, i, k):
     return df
 
 #
-def populate_shift(df, df_shift, i , k):
-    df_shift = rename_cols(df_shift, i, k)
-    df_new = pd.concat([df,df_shift.iloc[:,1:]], axis=1)
-    return df_new
+def empty_values(df, N, number_of_rows):
+    df.iloc[0:N, number_of_cols:]=''
+    #TODO: only the last row needs to be empty?
+    df.iloc[number_of_rows-1, number_of_cols:]=''  #-1 did not work for me
+    return df
 
 #
 def write_file(df, k):
     df.to_csv('../resources_norm_pop/' + my_norm_pop_file + '_' + str(k) + '.csv', ';', header=True,index = False)
 
-# Constants
+
+
+#===============================================================================
+# # Constants
+#===============================================================================
 my_norm_file     = 'AIGYM_dataset_example_norm'
 my_norm_pop_file = 'AIGYM_dataset_example_norm_pop'
 my_directory = "../resources_norm/"
@@ -84,14 +88,13 @@ for k in range(number_of_files):
     k=k+1
     
     # read
-    df_prot = pd.read_csv('../resources_norm/' + my_norm_file + '_' + str(k) + '.csv', ';', header=0)
+    df = pd.read_csv('../resources_norm/' + my_norm_file + '_' + str(k) + '.csv', ';', header=0)
     
     #
-    number_of_rows = df_prot.shape[0]
-    number_of_cols = df_prot.shape[1] # 20
+    number_of_rows = df.shape[0] # 
+    number_of_cols = df.shape[1] # 20
 
-    # populate
-    df_new = populate(df_prot, N, k)
+    df_new = populate(df, N, k)
     
     df_new = empty_values(df_new, N, number_of_rows)
     
