@@ -2,7 +2,7 @@
 Created on 9 mai 2019
 
 Used to create a second file to produce the mean values
-Supposed that the time marche by 0.1 from the first to the second
+Supposed that the time marches by 0.1 from the first to the second
 
 This is not used to create additional files but with little efforts it could
 However, it is out of the scope of this test

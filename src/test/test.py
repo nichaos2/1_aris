@@ -1,5 +1,15 @@
 '''
 Created on 9 mai 2019
+Edited on 13 mai 2019
+
+Run this to create files with normalised values 
+
+the files should be placed in the folder resources in the project
+if not change the my_directory
+
+Change the name of the files you want as input and output in constants
+
+Also notice that the location in read and write is hardcoded; you could change that as well
 
 @author: nioannou
 '''
@@ -90,8 +100,3 @@ max = find_min_max()[1]
 
 normalize()
 
-
-# df = pandas.read_csv('../resources_norm/' + mynewfile + '_1' + '.csv', ';', header=0)
-# 
-# df['col_new'] = [0]
-# print(df)
