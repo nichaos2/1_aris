@@ -88,8 +88,10 @@ def normalize():
 min = find_min_max()[0]
 max = find_min_max()[1]
 
-print(max)
-print(min)
-
 normalize()
 
+
+# df = pandas.read_csv('../resources_norm/' + mynewfile + '_1' + '.csv', ';', header=0)
+# 
+# df['col_new'] = [0]
+# print(df)
